@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="HctrConvert — Fast, private universal file converter for documents, images, audio, and video with formatting preserved." />
+  <title>HctrConvert — Universal File Converter</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body data-theme="dark">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" aria-label="Primary navigation">
+    <div class="nav-brand">
+      <i class="fa-solid fa-bolt-lightning brand-icon" aria-hidden="true"></i>
+      <span>HctrConvert</span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#formats">Formats</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <button type="button" class="theme-toggle" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle color theme">
+        <i class="fa-solid fa-moon" id="theme-icon" aria-hidden="true"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 100% Private · No sign-up needed</span>
+        <h1>Convert Any File,<br><span class="gradient-text">Instantly.</span></h1>
+        <p class="hero-sub">Transform documents, images, audio, and video while keeping your original layout, styles, and metadata intact. Processed locally and deleted immediately.</p>
+        <div class="hero-stats">
+          <div class="stat"><strong>200+</strong><span>Formats</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><strong>4</strong><span>Categories</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><strong>0</strong><span>Sign-up</span></div>
+        </div>
+        <div class="engine-status" id="engineStatus" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ===== CATEGORY TABS & CONVERTER ===== -->
+    <section class="converter-section" id="converter">
+      <div class="container">
+        <div class="category-tabs" role="tablist" aria-label="File conversion categories">
+          <button type="button" role="tab" aria-selected="true" class="tab-btn active" data-tab="document">
+            <i class="fa-regular fa-file-lines" aria-hidden="true"></i> Document
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="tab-btn" data-tab="image">
+            <i class="fa-regular fa-image" aria-hidden="true"></i> Image
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="tab-btn" data-tab="audio">
+            <i class="fa-solid fa-music" aria-hidden="true"></i> Audio
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="tab-btn" data-tab="video">
+            <i class="fa-solid fa-film" aria-hidden="true"></i> Video
+          </button>
+        </div>
+
+        <!-- ===== CONVERTER CARD ===== -->
+        <div class="converter-card">
+
+          <!-- Drop Zone -->
+          <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload files for conversion">
+            <input type="file" id="fileInput" hidden multiple />
+            <div class="drop-icon">
+              <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+            </div>
+            <p class="drop-title">Drop files here or <span class="link-text">browse</span></p>
+            <p class="drop-sub" id="drop-hint">Supports PDF, DOCX, ODT, RTF, XLSX, CSV, PPTX, TXT, HTML, MD, EPUB</p>
+            <p class="drop-limit">Max file size: 500 MB per file</p>
+          </div>
+
+          <!-- File List -->
+          <div class="file-list" id="fileList"></div>
+
+          <!-- Format Selector -->
+          <div class="format-selector" id="formatSelector" style="display:none;">
+            <div class="format-row">
+              <label>Convert to:</label>
+              <div class="format-grid" id="formatGrid" role="group" aria-label="Target file format"></div>
+            </div>
+
+            <!-- Options (collapsed by default) -->
+            <div class="options-toggle" id="optionsToggle" role="button" tabindex="0" aria-expanded="false">
+              <i class="fa-solid fa-sliders" aria-hidden="true"></i> Advanced Options
+              <i class="fa-solid fa-chevron-down" id="options-chevron" aria-hidden="true"></i>
+            </div>
+            <div class="options-panel" id="optionsPanel"></div>
+
+            <!-- Convert Button -->
+            <button type="button" class="convert-btn" id="convertBtn">
+              <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+              <span>Convert Now</span>
+            </button>
+          </div>
+
+          <!-- Progress Area -->
+          <div class="progress-area" id="progressArea" style="display:none;" aria-live="polite">
+            <div class="progress-files" id="progressFiles"></div>
+          </div>
+
+        </div><!-- /converter-card -->
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <h2 class="section-title">Why HctrConvert?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
+            <h3>Formatting Preserved</h3>
+            <p>Keeps document layouts, tables, fonts, EXIF orientation, color profiles, audio tags, and GIF/WebP animations intact.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></div>
+            <h3>Private & Secure</h3>
+            <p>Files stream directly to temporary job storage and are automatically deleted as soon as your download completes.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+            <h3>Lightning Fast</h3>
+            <p>Powered by PyMuPDF, Pandoc, LibreOffice, Pillow, and FFmpeg — battle-tested engines built for accuracy and speed.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+            <h3>Batch Conversion</h3>
+            <p>Drop multiple files at once, auto-detect their category, and convert the whole batch in parallel.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></div>
+            <h3>Advanced Controls</h3>
+            <p>Tune PDF page size, image dimensions & quality, audio bitrate & sample rate, and video resolution, FPS, and CRF.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-infinity" aria-hidden="true"></i></div>
+            <h3>Always Free</h3>
+            <p>No paywalls, no watermarks, and no account required. Convert as many files as you need.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SUPPORTED FORMATS ===== -->
+    <section class="formats-section" id="formats">
+      <div class="container">
+        <h2 class="section-title">Supported Formats</h2>
+        <div class="formats-tabs" role="tablist" aria-label="Supported formats by category">
+          <button type="button" role="tab" aria-selected="true" class="fmt-tab active" data-panel="doc-formats">Documents</button>
+          <button type="button" role="tab" aria-selected="false" class="fmt-tab" data-panel="img-formats">Images</button>
+          <button type="button" role="tab" aria-selected="false" class="fmt-tab" data-panel="audio-formats">Audio</button>
+          <button type="button" role="tab" aria-selected="false" class="fmt-tab" data-panel="video-formats">Video</button>
+        </div>
+        <div class="formats-container">
+          <div id="doc-formats" class="fmt-panel active">
+            <div class="fmt-badges">
+              <span class="fmt-badge">PDF</span><span class="fmt-badge">DOCX</span><span class="fmt-badge">DOC</span>
+              <span class="fmt-badge">ODT</span><span class="fmt-badge">RTF</span><span class="fmt-badge">TXT</span>
+              <span class="fmt-badge">XLSX</span><span class="fmt-badge">CSV</span><span class="fmt-badge">ODS</span>
+              <span class="fmt-badge">PPTX</span><span class="fmt-badge">ODP</span><span class="fmt-badge">HTML</span>
+              <span class="fmt-badge">MD</span><span class="fmt-badge">EPUB</span>
+            </div>
+          </div>
+          <div id="img-formats" class="fmt-panel">
+            <div class="fmt-badges">
+              <span class="fmt-badge">JPG</span><span class="fmt-badge">PNG</span><span class="fmt-badge">WebP</span>
+              <span class="fmt-badge">GIF</span><span class="fmt-badge">BMP</span><span class="fmt-badge">TIFF</span>
+              <span class="fmt-badge">AVIF</span><span class="fmt-badge">ICO</span><span class="fmt-badge">SVG</span>
+              <span class="fmt-badge">HEIC</span><span class="fmt-badge">PSD</span><span class="fmt-badge">EPS</span>
+              <span class="fmt-badge">TGA</span><span class="fmt-badge">JXL</span><span class="fmt-badge">PCX</span>
+              <span class="fmt-badge">QOI</span>
+            </div>
+          </div>
+          <div id="audio-formats" class="fmt-panel">
+            <div class="fmt-badges">
+              <span class="fmt-badge">MP3</span><span class="fmt-badge">WAV</span><span class="fmt-badge">FLAC</span>
+              <span class="fmt-badge">AAC</span><span class="fmt-badge">OGG</span><span class="fmt-badge">OPUS</span>
+              <span class="fmt-badge">M4A</span><span class="fmt-badge">WMA</span><span class="fmt-badge">AIFF</span>
+              <span class="fmt-badge">APE</span><span class="fmt-badge">WV</span><span class="fmt-badge">ALAC</span>
+              <span class="fmt-badge">MKA</span><span class="fmt-badge">AU</span><span class="fmt-badge">MP2</span>
+            </div>
+          </div>
+          <div id="video-formats" class="fmt-panel">
+            <div class="fmt-badges">
+              <span class="fmt-badge">MP4</span><span class="fmt-badge">MKV</span><span class="fmt-badge">AVI</span>
+              <span class="fmt-badge">MOV</span><span class="fmt-badge">WebM</span><span class="fmt-badge">WMV</span>
+              <span class="fmt-badge">FLV</span><span class="fmt-badge">3GP</span><span class="fmt-badge">TS</span>
+              <span class="fmt-badge">M4V</span><span class="fmt-badge">OGV</span><span class="fmt-badge">MPG</span>
+              <span class="fmt-badge">RMVB</span><span class="fmt-badge">ASF</span><span class="fmt-badge">GIF</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-q"><span>Is HctrConvert really free?</span><i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i></div>
+            <div class="faq-a">Yes, completely free. No sign-up, no watermarks, and no hidden limits.</div>
+          </div>
+          <div class="faq-item" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-q"><span>Will my document formatting be preserved?</span><i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i></div>
+            <div class="faq-a">Yes. HctrConvert uses layout-preserving engines (pdf2docx, PyMuPDF, Pandoc, and LibreOffice) so fonts, headings, tables, colors, and embedded images carry over cleanly.</div>
+          </div>
+          <div class="faq-item" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-q"><span>Are my files private?</span><i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i></div>
+            <div class="faq-a">Yes. Files are processed in isolated temporary job storage, deleted immediately after download, and swept automatically by a background cleaner.</div>
+          </div>
+          <div class="faq-item" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-q"><span>What is the max file size?</span><i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i></div>
+            <div class="faq-a">500 MB per file by default (configurable via the <code>MAX_FILE_SIZE_MB</code> environment variable).</div>
+          </div>
+          <div class="faq-item" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-q"><span>Can I convert multiple files at once?</span><i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i></div>
+            <div class="faq-a">Yes! Drop multiple files into the converter and convert the entire batch with real-time per-file progress bars.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <i class="fa-solid fa-bolt-lightning brand-icon" aria-hidden="true"></i>
+        <span>HctrConvert</span>
+        <p>Fast, free, and private file conversion.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Convert</h4>
+          <a href="#converter" data-switch-tab="document">Document Converter</a>
+          <a href="#converter" data-switch-tab="image">Image Converter</a>
+          <a href="#converter" data-switch-tab="audio">Audio Converter</a>
+          <a href="#converter" data-switch-tab="video">Video Converter</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#features">Features</a>
+          <a href="#formats">Supported Formats</a>
+          <a href="#faq">FAQ</a>
+          <a href="/docs" target="_blank" rel="noopener">API Docs</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HctrConvert. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
